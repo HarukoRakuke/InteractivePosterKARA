@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@v0.149.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@v0.149.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <section id="firstscreen">
+      <!-- первый экран -->
+      <div class="grid"></div>
+      <div class="movingcontainer">
+        <div class="danger"></div>
+      </div>
+      <div class="pink"></div>
+      <div class="blue_container">
+        <div class="blue"></div>
+        <div class="circle"></div>
+      </div>
+      <div class="shake">
+        <div class="first_syllable">ВЗЛ</div>
+      </div>
+      <div class="shake2">
+        <div class="second_syllable">ОМ</div>
+      </div>
+      <!--3д -->
+      <div id="three-container"></div>
+      <!--поп-апы -->
+      <div class="popup" id="popup0">Добро пожаловать</div>
+      <div class="popup" id="popup1">Вы — сотрудник кары</div>
+      <div class="popup" id="popup2">
+        Ваша задача следить за состоянием призраков, взаимодействуя с графиками
+        и панелями.
+      </div>
+      <div class="popup" id="popup3">Будьте осторожны.</div>
+    </section>
+    <section id="secondscreen">
+      <div class="panel">
+        <div id="header1">
+          <span class="bluespan"
+            ><h1 class="headeroutof3">Подключение</h1></span
+          >
+          <span class="bluespan"><h1 class="headeroutof3">Связей</h1></span>
+        </div>
+        <div class="slider">
+          <div class="plugin"></div>
+          <div class="plugout"></div>
+        </div>
+        <div class="slider">
+          <div class="plugin"></div>
+          <div class="plugout"></div>
+        </div>
+        <div class="slider">
+          <div class="plugin"></div>
+          <div class="plugout"></div>
+        </div>
+        <div class="slider blank">
+          <div class="flag"></div>
+        </div>
+        <div class="slider">
+          <div class="plugin"></div>
+          <div class="plugout"></div>
+        </div>
+        <div class="slider">
+          <div class="plugin"></div>
+          <div class="plugout"></div>
+        </div>
+        <div class="slider">
+          <div class="plugin"></div>
+          <div class="plugout"></div>
+        </div>
+        <div class="slider blank">
+          <div class="flag"></div>
+        </div>
+        <div class="slider">
+          <div class="plugin"></div>
+          <div class="plugout"></div>
+        </div>
+        <div class="slider">
+          <div class="plugin"></div>
+          <div class="plugout"></div>
+        </div>
+        <div class="slider">
+          <div class="plugin"></div>
+          <div class="plugout"></div>
+        </div>
+        <div class="slider blank">
+          <div class="flag"></div>
+        </div>
+        <div class="slider blank">
+          <div class="flag"></div>
+        </div>
+        <div class="slider">
+          <div class="plugin"></div>
+          <div class="plugout"></div>
+        </div>
+        <div class="slider">
+          <div class="plugin"></div>
+          <div class="plugout"></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div id="header2">
+          <span class="bluespan"><h1 class="headeroutof3">Контроль</h1></span>
+          <span class="bluespan"
+            ><h1 class="headeroutof3">Синхронизации</h1></span
+          >
+        </div>
+        <div class="valve" id="valve1"><span class="center"></span></div>
+        <div class="valve" id="valve2"><span class="center"></span></div>
+        <div class="valve" id="valve3"><span class="center"></span></div>
+        <div class="valve" id="valve4"><span class="center"></span></div>
+        <div class="valve" id="valve5"><span class="center"></span></div>
+      </div>
+      <div class="panel">
+        <div id="header3">
+          <span class="bluespan"
+            ><h1 class="headeroutof3">Отслеживание</h1></span
+          >
+          <span class="bluespan"><h1 class="headeroutof3">Ритма</h1></span>
+        </div>
+        <canvas id="plot"></canvas>
+      </div>
+    </section>
+    <section id="thirdscreen">
+      <div id="lineDiv"></div>
+      <div class="wrap">
+        <div class="container" id="container">
+          <div class="square" id="square1">
+            <div>1</div>
+            <div>корпус</div>
+          </div>
+          <div class="square" id="square2">
+            <div>2</div>
+            <div>корпус</div>
+          </div>
+          <div class="square" id="square3">
+            <div>3</div>
+            <div>корпус</div>
+          </div>
+          <div class="square" id="square4">
+            <div>4</div>
+            <div>корпус</div>
+          </div>
+          <div class="square" id="square5">
+            <div>5</div>
+            <div>корпус</div>
+          </div>
+        </div>
+      </div>
+      <div class="ghost_panel">
+        <div class="signal_box"></div>
+        <div class="signal_box"></div>
+
+        <div class="signal_box"></div>
+      </div>
+      <div class="signal_arrive_point"></div>
+      <div class="ghost_letter one"><p>С</p></div>
+      <div class="ghost_letter"><p>В</p></div>
+      <div class="ghost_letter third"><p>А</p></div>
+      <div class="ghost_panel">
+        <div class="signal_box first"></div>
+        <div class="signal_box"></div>
+        <div class="signal_box"></div>
+        <div class="signal_box"></div>
+        <div class="signal_box last"></div>
+      </div>
+      <div class="pink_grid"></div>
+    </section>
+    <script type="module" src="../scripts/three.js"></script>
+    <script src="./scripts/mainscript.js"></script>
+  </body>
+</html>

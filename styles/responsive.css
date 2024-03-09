@@ -1,0 +1,64 @@
+@media all and (max-width: 414px) {
+  #firstscreen {
+    background-position: left;
+    background-size: cover;
+  }
+  #secondscreen {
+    flex-direction: column;
+  }
+  .panel {
+    width: 100%;
+  }
+  #three-container {
+    top: 20%;
+  }
+  .panel h1 {
+    font-size: 50px;
+  }
+  #thirdscreen {
+    flex-direction: column;
+  }
+  .ghost_letter {
+    display: none;
+  }
+  .ghost_letter {
+    aspect-ratio: 0.8;
+    width: 50%;
+  }
+  .ghost_letter p {
+    line-height: 60vw;
+    font-size: 150px;
+  }
+  .ghost_letter.one {
+    order: 2;
+    align-self: flex-end;
+    display: block;
+  }
+  .ghost_letter.third {
+    order: 1;
+    margin-bottom: 30%;
+    display: block;
+  }
+  .pink_grid {
+    order: 3;
+    width: 100%;
+  }
+  .signal_arrive_point {
+    order: 4;
+    width: 100%;
+  }
+  .ghost_panel:nth-of-type(odd) {
+    display: none;
+  }
+  .ghost_panel:nth-of-type(even) {
+    order: 5;
+    width: 100%;
+  }
+  .signal_box.first {
+    display: none;
+  }
+  .wrap {
+    height: 50%;
+    width: 100%;
+  }
+}

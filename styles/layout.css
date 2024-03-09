@@ -1,0 +1,605 @@
+* {
+  transition: 1s;
+}
+section {
+  position: relative;
+}
+#firstscreen {
+  width: 100%;
+  height: 100vh;
+  max-height: 1500px;
+  overflow: hidden;
+  background-image: url('../img/white_pixels.svg');
+  background-position: center;
+  background-size: contain;
+  position: relative;
+}
+.movingcontainer {
+  animation: moveside 5s ease alternate infinite;
+  position: absolute;
+  mix-blend-mode: difference;
+}
+.danger {
+  height: 150vh;
+  width: 150vh;
+  max-width: 150vw;
+  background-image: url('../img/sign_danger.svg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: movearound 8s ease alternate infinite;
+}
+.grid {
+  width: 40vw;
+  height: 40vh;
+  background-image: url('../img/grid.svg');
+  background-size: contain;
+  background-repeat: repeat;
+  position: absolute;
+  right: 10%;
+  top: 0;
+}
+@keyframes movearound {
+  0% {
+    transform: translateY(0%);
+  }
+  50% {
+    transform: translateY(-30%);
+  }
+  100% {
+    transform: translateY(30%);
+  }
+}
+@keyframes movearound2 {
+  0% {
+    transform: translateY(50%) translateX(50%) rotate(30deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: translateY(-70%) translateX(50%);
+  }
+}
+@keyframes moveside {
+  0% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+@keyframes moveanotherside {
+  0% {
+    transform: translateX(30%);
+  }
+  100% {
+    transform: translateX(50%);
+    transform: translateY(50%);
+  }
+}
+
+.blue {
+  height: 80vh;
+  width: 30vw;
+  min-width: 200px;
+  background-image: url('../img/blue_pixels.svg');
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  left: 30%;
+  animation: movearound 8s ease alternate infinite;
+}
+.circle {
+  height: 20vw;
+  width: 25vw;
+  min-width: 100px;
+  background-image: url('../img/blue_circle.svg');
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  top: -20%;
+  transform-origin: top right;
+  right: 70%;
+  animation: movearound2 2s ease alternate-reverse infinite;
+}
+.blue_container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  animation: moveanotherside linear 5s alternate-reverse infinite;
+}
+.pink {
+  position: absolute;
+  width: 35%;
+  min-width: 300px;
+  aspect-ratio: 2;
+  background-color: magenta;
+  top: 0;
+  left: 0;
+  transition: 1s;
+}
+.shake,
+.shake2 {
+  position: absolute;
+  animation: shake 0.01s infinite alternate-reverse;
+}
+.shake {
+  top: 0;
+  left: 20%;
+}
+.shake2 {
+  bottom: 10%;
+  left: 50%;
+}
+.first_syllable {
+  font-family: 'HelveticaBold', sans-serif;
+  font-size: clamp(250px, 30vw, 30vw);
+  transform: scaleX(0.5);
+  color: blue;
+  position: relative;
+  line-height: clamp(170px, 20vw, 20vw);
+  animation: xmove 1s ease-in-out alternate-reverse infinite;
+}
+
+.second_syllable {
+  font-family: 'HelveticaBold', sans-serif;
+  font-size: clamp(250px, 30vw, 30vw);
+  transform: scaleX(0.5);
+  color: magenta;
+  line-height: 20vw;
+  animation: xmove 1s ease-in-out alternate-reverse infinite;
+}
+@keyframes xmove {
+  100% {
+    transform: translateX(-50%) scaleX(0.5);
+  }
+}
+@keyframes shake {
+  0% {
+    transform: translateY(-2%);
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateY(0%);
+    transform: translateX(-2%);
+  }
+}
+
+#three-container {
+  width: 100vw;
+  min-width: 800px;
+  aspect-ratio: 1.6;
+  position: absolute;
+  right: -25%;
+  top: -10%;
+}
+#three-canvas {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#secondscreen {
+  overflow-x: clip;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.panel {
+  width: 33.3vw;
+  aspect-ratio: 0.9;
+  position: relative;
+  overflow: hidden;
+}
+
+#header1,
+#header2,
+#header3 {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  flex-wrap: wrap;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.panel h1 {
+  font-family: 'Helvetica', sans-serif;
+  color: white;
+  display: inline-block;
+  font-size: 5vw;
+  transform: scaleX(0.5);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.bluespan {
+  background-color: blue;
+  border-radius: 500px;
+  padding: 0.5vw 0;
+  display: flex;
+  justify-content: center;
+}
+.panel:nth-of-type(odd) span:nth-of-type(1),
+.panel:nth-of-type(even) span:nth-of-type(2) {
+  width: 100%;
+}
+.panel:nth-of-type(odd) span:nth-of-type(2),
+.panel:nth-of-type(even) span:nth-of-type(2) {
+  position: relative;
+  margin-top: -2vw;
+}
+
+.panel:nth-of-type(1),
+.panel:nth-of-type(3) {
+  background-color: magenta;
+}
+
+.popup {
+  position: absolute;
+  color: white;
+  display: none;
+  top: 30%;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  font-family: 'HelveticaBold', sans-serif;
+  padding: 0vw 3vw;
+  background-color: black;
+  transform: scaleX(0.4);
+  font-size: clamp(85px, 5vw, 5vw);
+  text-transform: uppercase;
+  border-radius: 20px;
+  border: 0.3vw solid white;
+  text-align: center;
+}
+
+.popup.show {
+  display: block;
+  opacity: 1;
+}
+
+#popup0 {
+  z-index: 5;
+  display: block;
+}
+/* 1 задание - соединение блоков*/
+.panel:nth-of-type(1) {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.slider {
+  height: 6%;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  background-image: url('../img/line.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: relative;
+}
+.slider:before {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-image: url('../img/before1_picture.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  right: 100%;
+  transform-origin: right center;
+  rotate: -45deg;
+}
+.slider::after {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-image: url('../img/before1_picture.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform-origin: right top;
+  rotate: 135deg;
+}
+.blank {
+  align-items: center;
+}
+.flag {
+  width: 35%;
+  height: 100%;
+  border-radius: 0.3vw;
+  position: absolute;
+  background-color: black;
+}
+
+.plugin {
+  background-image: url('../img/plug_in_1.svg');
+  width: 25%;
+  height: 100%;
+  left: 45%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+}
+.plugout {
+  background-image: url('../img/plug_out_1.svg');
+  width: 56%;
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 44%;
+}
+.slider:nth-of-type(odd) .plugin {
+  background-image: url('../img/plug_in_2.svg');
+  width: 36%;
+  left: 2%;
+}
+.slider:nth-of-type(3n - 1) .plugin {
+  width: 50%;
+  left: 3%;
+  background-image: url('../img/plug_in_4.svg');
+}
+
+.slider:nth-of-type(5n - 1) .plugin {
+  background-image: url('../img/plug_in_3.svg');
+  width: 20%;
+}
+.slider:nth-of-type(even) .plugout {
+  background-image: url('../img/plug_out_2.svg');
+  width: 30%;
+  left: 70%;
+}
+.slider:nth-of-type(3n - 1) .plugout {
+  background-image: url('../img/plug_out_3.svg');
+  width: 19%;
+  left: 81%;
+}
+.slider:nth-of-type(5n - 1) .plugout {
+  background-image: url('../img/plug_out_4.svg');
+  width: 50%;
+  left: 50%;
+}
+@keyframes blinkwhite {
+  20%,
+  40%,
+  60%,
+  80% {
+    background-color: white;
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  100% {
+    background-color: blue;
+  }
+}
+@keyframes blinkblue {
+  20%,
+  40%,
+  60%,
+  80% {
+    color: blue;
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  100% {
+    color: white;
+  }
+}
+/* 2 задание - синхронизирование*/
+.panel:nth-of-type(2) {
+  overflow: visible;
+}
+.valve {
+  background-image: url('../img/valve.svg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  z-index: 3;
+  animation: aroundtheworld 2s infinite linear;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.valve.pause {
+  animation-play-state: paused;
+}
+.center {
+  width: 8%;
+  aspect-ratio: 1;
+
+  pointer-events: all;
+}
+
+#valve1,
+#valve5 {
+  width: 50%;
+  height: 30%;
+  top: 45%;
+  transform-origin: center;
+}
+#valve2,
+#valve3,
+#valve4 {
+  width: 60%;
+  height: 70%;
+}
+#valve5 {
+  right: 0;
+  animation-delay: -0.4s;
+}
+#valve2 {
+  top: 20%;
+  left: 10%;
+  animation-delay: -0.3s;
+}
+#valve3 {
+  top: 20%;
+  right: 10%;
+  animation-delay: -0.5s;
+}
+#valve4 {
+  top: 35%;
+  left: 23%;
+  animation-delay: -0.6s;
+}
+@keyframes aroundtheworld {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
+}
+/* 3 задание - отслеживание графиков*/
+.panel:nth-of-type(3) {
+  background-image: url('../img/background.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.panel:nth-of-type(3) canvas {
+  width: 100%;
+  height: 100%;
+}
+/* 3 экран*/
+#thirdscreen {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: black;
+  position: relative;
+  overflow: hidden;
+}
+.wrap {
+  width: 80%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+}
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.square {
+  position: absolute;
+  width: clamp(90px, 15vw, 15vw);
+  aspect-ratio: 1;
+  border-radius: 100%;
+  border: white solid 2px;
+  outline: 5px white dashed;
+  outline-offset: 15px;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  z-index: 4;
+  transition: none;
+}
+.square div {
+  font-family: 'Helvetica', sans-serif;
+  color: white;
+  font-size: clamp(20px, 3vw, 3vw);
+  width: 100%;
+  text-align: center;
+}
+
+#square1 {
+  z-index: 5;
+}
+#square2 {
+  z-index: 5;
+}
+
+#lineDiv {
+  position: absolute;
+  height: 0.2vw;
+  background-color: white;
+  transform-origin: left center;
+  transition: 0s;
+  z-index: 4;
+}
+
+.ghost_panel {
+  width: 20%;
+  aspect-ratio: 1.3;
+  box-sizing: border-box;
+  align-self: baseline;
+  background-color: blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signal_box {
+  width: 80%;
+  aspect-ratio: 4;
+  background-color: white;
+  margin-top: 15%;
+}
+.signal_box.last {
+  margin-bottom: 15%;
+}
+
+.signal_arrive_point {
+  width: 20%;
+  aspect-ratio: 1;
+  box-sizing: border-box;
+  background-color: black;
+  border: 1vw white solid;
+}
+.ghost_letter {
+  width: 20%;
+
+  background-color: blue;
+  position: relative;
+}
+p {
+  transform: scale(-1, 1);
+  font-family: 'Captured';
+  font-size: 27vw;
+  color: white;
+  font-weight: 100;
+  display: inline-block;
+  transition: 1s;
+  line-height: 19vw;
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+}
+p:hover {
+  transform: scale(1) scale(-1, 1);
+}
+.pink_grid {
+  width: 35%;
+  aspect-ratio: 1;
+  background-color: magenta;
+}
+/* летающие частицы*/

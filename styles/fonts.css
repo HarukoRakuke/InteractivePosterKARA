@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Captured'; /* название шрифта */
+  src: url(../fonts/Captured-Regular_5.ttf); /* ссылка на файл */
+}
+@font-face {
+  font-family: 'HelveticaBold'; /* название шрифта */
+  src: url(../fonts/Helvetica-Bold.ttf); /* ссылка на файл */
+}
+@font-face {
+  font-family: 'Helvetica'; /* название шрифта */
+  src: url(../fonts/HELVETICA.TTF); /* ссылка на файл */
+}
