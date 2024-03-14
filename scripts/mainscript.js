@@ -94,9 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
           in1.getBoundingClientRect().right + slider.offsetWidth / 6;
         if (clientX < newLeft) {
           out1.style.left = expectedPosition;
-          out1sWithSpecificPosition++;
           document.removeEventListener('mousemove', move); // Remove the event listener after setting the position
-          return;
+          out1sWithSpecificPosition++;
         } else if (clientX >= sliderRect.right) {
           out1.style.left =
             sliderRect.right - sliderRect.left - out1.offsetWidth + 'px';
@@ -105,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
             clientX - sliderRect.left - out1.offsetWidth / 2 + 'px';
         }
 
+        console.log(out1sWithSpecificPosition);
         // Check if at least 8 out1 elements have the specific position
 
         if (out1sWithSpecificPosition >= 8) {
@@ -203,16 +203,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#secondscreen').offsetHeight;
   let container = document.getElementById('container');
   let squares = document.querySelectorAll('.square');
-  let square1 = document.getElementById('square1');
-  let square2 = document.getElementById('square2');
-  let lineDiv = document.getElementById('lineDiv');
-
+  let lineDivs = document.querySelectorAll('.lineDiv');
   let isDragging = false;
+
+  squares[1].addEventListener('mousedown', handleMouseDown);
+
   function handleMouseDown(e) {
     isDragging = true;
     updateLine(e.pageX, e.pageY);
   }
-  square1.addEventListener('mousedown', handleMouseDown);
 
   document.addEventListener('mousemove', (e) => {
     if (isDragging) {
@@ -223,65 +222,68 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('mouseup', (e) => {
     if (isDragging) {
       isDragging = false;
-      let square2 = document.getElementById('square2');
+      let targetSquare = squares[1 + 1];
 
       if (
-        e.pageX - wrap.getBoundingClientRect().left > square2.offsetLeft &&
+        e.pageX - wrap.getBoundingClientRect().left > targetSquare.offsetLeft &&
         e.pageX - wrap.getBoundingClientRect().left <
-          square2.offsetLeft + square2.offsetWidth &&
-        e.pageY - screenOffset > square2.offsetTop &&
-        e.pageY - screenOffset < square2.offsetTop + square2.offsetHeight
+          targetSquare.offsetLeft + targetSquare.offsetWidth &&
+        e.pageY - screenOffset > targetSquare.offsetTop &&
+        e.pageY - screenOffset <
+          targetSquare.offsetTop + targetSquare.offsetHeight
       ) {
         setInterval(connectSquares, 1);
       } else {
-        lineDiv.style.width = '0';
+        lineDivs[1].style.width = '0';
       }
     }
   });
 
   function updateLine(pageX, pageY) {
-    let square1 = document.getElementById('square1');
+    let squares = document.querySelectorAll('.square');
+    let square = squares[1];
     x1 =
-      square1.offsetLeft +
-      square1.offsetWidth / 2 +
+      square.offsetLeft +
+      square.offsetWidth / 2 +
       wrap.getBoundingClientRect().left;
-    y1 = square1.offsetTop + square1.offsetHeight / 2;
+    y1 = square.offsetTop + square.offsetHeight / 2;
     console.log(pageX, pageY - screenOffset);
     const distance = Math.sqrt(
       Math.pow(pageX - x1, 2) + Math.pow(pageY - screenOffset - y1, 2)
     );
-    lineDiv.style.left = x1 + 'px';
-    lineDiv.style.top = y1 + 'px';
-    lineDiv.style.width = distance + 'px';
-    lineDiv.style.transform = `rotate(${Math.atan2(
+    lineDivs[1].style.left = x1 + 'px';
+    lineDivs[1].style.top = y1 + 'px';
+    lineDivs[1].style.width = distance + 'px';
+    lineDivs[1].style.transform = `rotate(${Math.atan2(
       pageY - screenOffset - y1,
       pageX - x1
     )}rad)`;
   }
 
   function connectSquares() {
-    let square1 = document.getElementById('square1');
-    let square2 = document.getElementById('square2');
+    let squares = document.querySelectorAll('.square');
+    let square = squares[1];
+    let targetSquare = squares[1 + 1];
     let x1 =
-      square1.offsetLeft +
-      square1.offsetWidth / 2 +
+      square.offsetLeft +
+      square.offsetWidth / 2 +
       wrap.getBoundingClientRect().left;
-    let y1 = square1.offsetTop + square1.offsetHeight / 2;
+    let y1 = square.offsetTop + square.offsetHeight / 2;
     let x2 =
-      square2.offsetLeft +
-      square2.offsetWidth / 2 +
+      targetSquare.offsetLeft +
+      targetSquare.offsetWidth / 2 +
       wrap.getBoundingClientRect().left;
-    let y2 = square2.offsetTop + square1.offsetHeight / 2;
+    let y2 = targetSquare.offsetTop + targetSquare.offsetHeight / 2;
 
-    lineDiv.style.left = x1 + 'px';
-    lineDiv.style.top = y1 + 'px';
+    lineDivs[1].style.left = x1 + 'px';
+    lineDivs[1].style.top = y1 + 'px';
 
     const distance1 = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 
-    lineDiv.style.width = distance1 + 'px';
-    lineDiv.style.transform = `rotate(${Math.atan2(y2 - y1, x2 - x1)}rad)`;
+    lineDivs[1].style.width = distance1 + 'px';
+    lineDivs[1].style.transform = `rotate(${Math.atan2(y2 - y1, x2 - x1)}rad)`;
 
-    square1.removeEventListener('mousedown', handleMouseDown);
+    square.removeEventListener('mousedown', handleMouseDown);
   }
 
   squares.forEach((square, index) => {
@@ -295,12 +297,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let deltaX = (Math.random() - 0.5) * 2;
     let deltaY = (Math.random() - 0.5) * 2;
 
-    const speed = 3;
+    const speed = 2;
 
     setInterval(() => {
       const container = document.getElementById('container');
-
-      const rect1 = square.getBoundingClientRect();
 
       posX += deltaX * speed;
       posY += deltaY * speed;
@@ -327,4 +327,16 @@ document.addEventListener('DOMContentLoaded', () => {
       updateLine();
     }, 3);
   }
+
+  document
+    .querySelector('.signal_box')
+    .addEventListener('mouseover', function () {
+      document.querySelector('.arrow svg path').style.fill = 'white';
+    });
+
+  document
+    .querySelector('.signal_box')
+    .addEventListener('mouseout', function () {
+      document.querySelector('.arrow svg path').style.fill = 'black';
+    });
 });

@@ -1,7 +1,21 @@
+@media (max-aspect-ratio: 3/2.5) {
+  #firstscreen {
+    height: 50vh;
+  }
+  .square {
+    max-width: 110px;
+  }
+  .square div {
+    font-size: clamp(30px, 2vw, 2vw);
+  }
+}
+
 @media all and (max-width: 414px) {
   #firstscreen {
     background-position: left;
     background-size: cover;
+    max-height: 600px;
+    height: 100vh;
   }
   #secondscreen {
     flex-direction: column;
@@ -27,17 +41,17 @@
   }
   .ghost_letter p {
     line-height: 60vw;
-    font-size: 150px;
+    font-size: 255px;
   }
   .ghost_letter.one {
     order: 2;
     align-self: flex-end;
-    display: block;
+    display: flex;
   }
   .ghost_letter.third {
     order: 1;
     margin-bottom: 30%;
-    display: block;
+    display: flex;
   }
   .pink_grid {
     order: 3;
@@ -60,5 +74,12 @@
   .wrap {
     height: 50%;
     width: 100%;
+  }
+  .signal_arrive_point h1 {
+    font-size: 20vw;
+    padding-top: 10vw;
+  }
+  .white_container {
+    aspect-ratio: 1.2;
   }
 }
