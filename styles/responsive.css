@@ -82,4 +82,26 @@
   .white_container {
     aspect-ratio: 1.2;
   }
+  footer {
+    aspect-ratio: 0.5;
+  }
+  .blue-div {
+    float: left;
+  }
+  .blue-div.short {
+    height: 100%;
+  }
+  .blue-div.long {
+    height: 60%;
+  }
+  footer .wrap-ghost {
+    height: 80%;
+  }
+  .ghost {
+    rotate: 90deg;
+    width: 180%;
+  }
+  .left {
+    order: 2;
+  }
 }

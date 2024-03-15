@@ -846,10 +846,10 @@ footer .wrap-ghost {
 .year,
 .group {
   font-family: 'HelveticaBold';
-  font-size: 2vw;
+  font-size: clamp(20px, 2vw, 2vw);
   color: black;
   background-color: white;
-  padding: 0.5vw;
+  padding: clamp(10px, 0.5vw, 0.5vw);
   line-height: 3vw;
   text-wrap: nowrap;
   align-self: flex-end;
