@@ -9,16 +9,24 @@
     font-size: clamp(30px, 2vw, 2vw);
   }
 }
-
+@media all and (min-width: 414px) {
+  .circle {
+    width: clamp(80px, 15vw, 15vw);
+    font-size: clamp(20px, 3vw, 3vw);
+  }
+}
 @media all and (max-width: 414px) {
   #firstscreen {
     background-position: left;
     background-size: cover;
-    max-height: 600px;
+    max-height: 800px;
     height: 100vh;
   }
   #secondscreen {
     flex-direction: column;
+  }
+  .circle {
+    width: 130px;
   }
   .panel {
     width: 100%;
@@ -68,12 +76,17 @@
     order: 5;
     width: 100%;
   }
+  .signal_box:nth-of-type(3) {
+    margin-bottom: 15%;
+  }
+
   .signal_box.first {
     display: none;
   }
-  .wrap {
-    height: 50%;
+  .wrapCircle {
+    height: 53%;
     width: 100%;
+    margin-left: 0;
   }
   .signal_arrive_point h1 {
     font-size: 20vw;
@@ -97,11 +110,45 @@
   footer .wrap-ghost {
     height: 80%;
   }
+
+  .author,
+  .year,
+  .group {
+    font-size: 20px;
+    padding: 20px;
+  }
   .ghost {
     rotate: 90deg;
     width: 180%;
   }
   .left {
     order: 2;
+    align-self: flex-start;
+  }
+  .year {
+    order: 1;
+    align-self: flex-start;
+  }
+  .author {
+    order: 2;
+    margin-top: 100%;
+  }
+  .info {
+    padding: 30px;
+  }
+  .signal_box {
+    font-size: clamp(30px, 15vw, 15vw);
+    line-height: 18vw;
+  }
+  #forthscreen {
+    padding: 50px 0;
+  }
+  #forthscreen .white_container {
+    aspect-ratio: 1;
+    background-image: url('../img/pixels2.svg');
+    --move-percent: 58%;
+  }
+  .net_absolute {
+    background-image: url('../img/net_absolute_2.svg');
   }
 }

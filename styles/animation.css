@@ -1,0 +1,130 @@
+@keyframes blinkwhite {
+  20%,
+  40%,
+  60%,
+  80% {
+    background-color: white;
+    color: var(--initial-background);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  100% {
+    background-color: var(--initial-background);
+    color: white;
+  }
+}
+@keyframes blinkblue {
+  20%,
+  40%,
+  60%,
+  80% {
+    color: var(--initial-background);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  100% {
+    color: white;
+  }
+}
+
+@keyframes xmove {
+  100% {
+    transform: translateX(-50%) scaleX(0.5);
+  }
+}
+@keyframes shake {
+  0% {
+    transform: translateY(-2%);
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateY(0%);
+    transform: translateX(-2%);
+  }
+}
+
+@keyframes movearound {
+  0% {
+    transform: translateY(0%);
+  }
+  50% {
+    transform: translateY(-30%);
+  }
+  100% {
+    transform: translateY(30%);
+  }
+}
+@keyframes movearound2 {
+  0% {
+    transform: translateY(50%) translateX(50%) rotate(30deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: translateY(-70%) translateX(50%);
+  }
+}
+@keyframes moveside {
+  0% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+@keyframes moveanotherside {
+  0% {
+    transform: translateX(30%);
+  }
+  100% {
+    transform: translateX(50%);
+    transform: translateY(50%);
+  }
+}
+
+@keyframes aroundtheworld {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
+}
+
+@keyframes ghost_popup {
+  20% {
+    background-position: 0% 10%;
+  }
+  35% {
+    background-position: 0% 20%;
+  }
+  40% {
+    background-position: 0% -10%;
+  }
+  55% {
+    background-position: 0% 80%;
+  }
+  60% {
+    background-position: 0% 45%;
+  }
+  90% {
+    background-position: 0% 30%;
+  }
+  100% {
+    background-position: 0% 10%;
+  }
+}
+
+@keyframes pixels_moving {
+  to {
+    background-position: var(--move-percent) 0;
+  }
+}
