@@ -234,23 +234,15 @@ function popupSequence() {
 }
 
 function positionPopup(popup) {
-  let section = document.getElementById('firstscreen');
-  console.log(section.offsetWidth, section.offsetHeight);
-  popup.style.top = parseInt(Math.random() * 100) + 'vh';
-  popup.style.left = parseInt(Math.random() * 100) + 'vw';
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
+  const { width, height } = popup.getBoundingClientRect();
 
-  popup.style.top = popup.offsetTop + 'px';
-  popup.style.left = popup.offsetLeft + 'px';
+  const widthRange = screenWidth - width;
+  const heightRange = screenHeight - height;
 
-  if (popup.style.top > section.offsetHeight - popup.offsetHeight) {
-    popup.style.top =
-      popup.style.top - popup.offsetHeight - popup.offsetHeight + 'px';
-  }
-
-  if (popup.style.left > section.offsetWidth - popup.offsetWidth) {
-    popup.style.left =
-      popup.style.left - popup.offsetWidth - popup.offsetWidth + 'px';
-  }
+  popup.style.top = getRandomArbitrary(0, heightRange) + 'px';
+  popup.style.left = getRandomArbitrary(0, widthRange) + 'px';
 }
 
 function connectBlocksWithEachOther() {
@@ -372,8 +364,6 @@ function pauseSpeed() {
   var valves = document.querySelectorAll('.valve');
   valves.forEach(function (valve, index) {
     let boost = parseInt(getRandomArbitrary(1, 4)) * 2;
-
-    console.log(boost);
     valve.style.animationDuration = `${boost}s`;
     var center = valve.querySelector('.center');
     center.addEventListener('click', click);
@@ -405,17 +395,86 @@ function checkSpeed() {
   console.log(valveAnimationDuration);
   console.log(allEqual(valveAnimationDuration));
   if (allEqual(valveAnimationDuration)) {
-    var blueSpans = document.querySelectorAll('.bluespan');
-    var headersOutOf3 = document.querySelectorAll('.headeroutof3');
-
-    blueSpans[2].style.animation = 'blinkwhite 1s forwards steps(1)';
-    headersOutOf3[2].style.animation = 'blinkblue 1s forwards steps(1)';
-    blueSpans[3].style.animation = 'blinkwhite 1s forwards steps(1)';
-    headersOutOf3[3].style.animation = 'blinkblue 1s forwards steps(1)';
+    animationToggle();
   }
 }
 
-function drawGraph() {
+function animationToggle() {
+  var blueSpans = document.querySelectorAll('.bluespan');
+  var headersOutOf3 = document.querySelectorAll('.headeroutof3');
+
+  blueSpans[2].classList.remove('blinkwhite');
+  headersOutOf3[2].classList.remove('blinkblue');
+  blueSpans[3].classList.remove('blinkwhite');
+  headersOutOf3[3].classList.remove('blinkblue');
+  setTimeout(() => {
+    blueSpans[2].classList.add('blinkwhite');
+    headersOutOf3[2].classList.add('blinkblue');
+    blueSpans[3].classList.add('blinkwhite');
+    headersOutOf3[3].classList.add('blinkblue');
+  }, 0);
+}
+
+function animationToggle2() {
+  var blueSpans = document.querySelectorAll('.bluespan');
+  var headersOutOf3 = document.querySelectorAll('.headeroutof3');
+
+  blueSpans[4].classList.remove('blinkwhite');
+  headersOutOf3[4].classList.remove('blinkblue');
+  blueSpans[5].classList.remove('blinkwhite');
+  headersOutOf3[5].classList.remove('blinkblue');
+  setTimeout(() => {
+    blueSpans[4].classList.add('blinkwhite');
+    headersOutOf3[4].classList.add('blinkblue');
+    blueSpans[5].classList.add('blinkwhite');
+    headersOutOf3[5].classList.add('blinkblue');
+  }, 0);
+}
+
+function drawScheme() {
+  var canvasScheme = document.querySelector('#overflowplot');
+  var ctx = canvasScheme.getContext('2d');
+  var b = Math.trunc(getRandomArbitrary(1, 5) * 10) / 10;
+  console.log(`b - ${b}`);
+
+  function f(x) {
+    return Math.sin(b * x) * 5;
+  }
+
+  canvasScheme.width = 1200;
+  canvasScheme.height = 800;
+
+  var scaleX = canvasScheme.width / 20;
+  var scaleY = canvasScheme.height / 20;
+  var offsetX = canvasScheme.width / 2;
+  var offsetY = canvasScheme.height / 1.6;
+
+  function drawFunction() {
+    ctx.clearRect(0, 0, canvasScheme.width, canvasScheme.height);
+
+    ctx.beginPath();
+    ctx.strokeStyle = 'white';
+    ctx.setLineDash([20, 10]);
+    ctx.lineWidth = 12;
+
+    for (var pixelX = 0; pixelX < canvasScheme.width; pixelX++) {
+      var x = (pixelX - offsetX) / scaleX;
+      var y = f(x);
+      var pixelY = y * scaleY + offsetY;
+
+      if (pixelX === 0) {
+        ctx.moveTo(pixelX, pixelY);
+      } else {
+        ctx.lineTo(pixelX, pixelY);
+      }
+    }
+    ctx.stroke();
+  }
+  drawFunction();
+  drawGraph(b);
+}
+
+function drawGraph(b) {
   var canvas = document.querySelector('#plot');
   var ctx = canvas.getContext('2d');
   var a = 1;
@@ -454,17 +513,30 @@ function drawGraph() {
 
   drawFunction();
 
-  canvas.addEventListener('wheel', function (event) {
+  function wheelFunction(event) {
     event.preventDefault();
     var delta = event.deltaY;
-    if (delta < 0 && a < 3) {
+
+    if (delta < 0 && a < 5) {
       a *= 1.1;
-    } else if (delta > 0 && a > 0.5) {
+    } else if (delta > 0 && a > 1) {
       a /= 1.1;
     }
+    a = Math.trunc(a * 10) / 10;
 
+    console.log(`a - ${a}`);
+
+    console.log(`b - ${b}`); // Access b from drawScheme
+
+    if (a === b) {
+      animationToggle2();
+      console.log('синхронизация');
+      canvas.removeEventListener('wheel', wheelFunction);
+    }
     drawFunction();
-  });
+  }
+
+  canvas.addEventListener('wheel', wheelFunction);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -476,7 +548,8 @@ document.addEventListener('DOMContentLoaded', () => {
   connectBlocksWithEachOther();
   resizeConnection();
   pauseSpeed();
-  drawGraph();
+  drawScheme();
+  setInterval(drawScheme, 5000);
 
   document
     .querySelector('.signal_box')
