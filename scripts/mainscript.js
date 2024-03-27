@@ -314,15 +314,10 @@ function connectBlocksWithEachOther() {
 
       function completeConnection() {
         if (out1sWithSpecificPosition >= 8) {
-          blueSpans.forEach(function (blueSpan, index) {
-            if (index < 2) {
-              blueSpan.style.animation = 'blinkwhite 1s forwards steps(1)';
-            }
-          });
-          headersOutOf3.forEach(function (header, index) {
-            if (index < 2)
-              header.style.animation = 'blinkblue 1s forwards steps(1)';
-          });
+          blueSpans[0].style.animation = 'blinkwhite 1s forwards steps(1)';
+          headersOutOf3[0].style.animation = 'blinkblue 1s forwards steps(1)';
+          blueSpans[1].style.animation = 'blinkwhite 1s forwards steps(1)';
+          headersOutOf3[1].style.animation = 'blinkblue 1s forwards steps(1)';
         }
       }
 
@@ -386,7 +381,7 @@ function pauseSpeed() {
       if (boost > 2 && boost <= 8) {
         boost = boost - 2;
       } else if (boost <= 2) {
-        boost = boost + 2;
+        boost = 8;
       } else if (boost > 8) {
         boost = 8;
       }
@@ -405,7 +400,19 @@ function checkSpeed() {
     valveAnimationDuration.push(duration);
   });
 
+  const allEqual = (valveAnimationDuration) =>
+    valveAnimationDuration.every((v) => v === valveAnimationDuration[0]);
   console.log(valveAnimationDuration);
+  console.log(allEqual(valveAnimationDuration));
+  if (allEqual(valveAnimationDuration)) {
+    var blueSpans = document.querySelectorAll('.bluespan');
+    var headersOutOf3 = document.querySelectorAll('.headeroutof3');
+
+    blueSpans[2].style.animation = 'blinkwhite 1s forwards steps(1)';
+    headersOutOf3[2].style.animation = 'blinkblue 1s forwards steps(1)';
+    blueSpans[3].style.animation = 'blinkwhite 1s forwards steps(1)';
+    headersOutOf3[3].style.animation = 'blinkblue 1s forwards steps(1)';
+  }
 }
 
 function drawGraph() {
