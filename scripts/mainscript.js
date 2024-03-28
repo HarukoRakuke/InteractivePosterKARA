@@ -539,8 +539,24 @@ function drawGraph(b) {
   canvas.addEventListener('wheel', wheelFunction);
 }
 
+function clue() {
+  let panels = document.querySelectorAll('.panel');
+  panels.forEach((panel, index) => {
+    let clue = document.querySelectorAll('.clue-popup');
+    console.log(clue);
+    let question = panel.querySelector('.clue');
+    question.addEventListener('click', function () {
+      clue[index].classList.add('show');
+      setTimeout(() => {
+        clue[index].classList.remove('show');
+      }, 1000);
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   popupSequence();
+  clue();
   initCircles();
   initDocument();
   mobileCatchCircle();

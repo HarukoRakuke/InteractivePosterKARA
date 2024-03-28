@@ -187,22 +187,25 @@ section {
 .blinkwhite {
   animation: blinkwhite 1s forwards steps(1);
 }
-.panel:nth-of-type(odd) span:nth-of-type(1),
-.panel:nth-of-type(even) span:nth-of-type(2) {
+.panel.first span:nth-of-type(1),
+.panel.third span:nth-of-type(1),
+.panel.second span:nth-of-type(2) {
   width: 100%;
 }
-.panel:nth-of-type(odd) span:nth-of-type(2),
-.panel:nth-of-type(even) span:nth-of-type(2) {
+.panel.first span:nth-of-type(2),
+.panel.third span:nth-of-type(2),
+.panel.second span:nth-of-type(2) {
   position: relative;
   margin-top: -2vw;
 }
 
 .panel:nth-of-type(1),
-.panel:nth-of-type(3) {
+.panel.third {
   background-color: magenta;
 }
 
-.popup {
+.popup,
+.clue-popup {
   position: absolute;
   color: white;
   display: none;
@@ -217,11 +220,22 @@ section {
   font-size: clamp(85px, 5vw, 5vw);
   text-transform: uppercase;
   border-radius: 20px;
+  transform-origin: left center;
   border: 0.3vw solid white;
   text-align: center;
 }
 
-.popup.show {
+.clue-popup {
+  width: 70%;
+  height: 50%;
+  position: absolute;
+  top: 30%;
+
+  z-index: 10;
+}
+
+.popup.show,
+.clue-popup.show {
   display: block;
   opacity: 1;
 }
@@ -231,7 +245,7 @@ section {
   display: block;
 }
 /* 1 задание - соединение блоков*/
-.panel:nth-of-type(1) {
+.panel.first {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -353,7 +367,7 @@ section {
   left: 50%;
 }
 /* 2 задание - синхронизирование*/
-.panel:nth-of-type(2) {
+.panel.second {
   overflow: visible;
 }
 .valve {
@@ -410,16 +424,31 @@ section {
   right: 0;
 }
 /* 3 задание - отслеживание графиков*/
-.panel:nth-of-type(3) {
+
+.panel.third {
   background-image: url('../img/background.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
-.panel:nth-of-type(3) canvas {
+.panel.third canvas {
   width: 100%;
   height: 100%;
   position: relative;
+}
+
+.clue {
+  position: absolute;
+  background-color: blue;
+  border-radius: 100%;
+  padding: 1vw;
+  left: 2%;
+  bottom: 2%;
+  z-index: 8;
+  color: white;
+  font-family: 'HelveticaBold';
+  font-size: 1.5vw;
+  line-height: 1vw;
 }
 #overflowplot {
   position: absolute;
