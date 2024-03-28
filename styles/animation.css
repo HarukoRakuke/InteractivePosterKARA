@@ -128,3 +128,23 @@
     background-position: var(--move-percent) 0;
   }
 }
+@keyframes glitch {
+  10% {
+    transform: translateX(-10px);
+  }
+  30% {
+    transform: translateX(0px);
+  }
+  40% {
+    transform: translateX(10px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  80% {
+    transform: translateX(-15px);
+  }
+  100% {
+    transform: translateX(10px);
+  }
+}
