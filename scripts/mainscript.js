@@ -304,6 +304,8 @@ function connectBlocksWithEachOther() {
           headersOutOf3[0].style.animation = 'blinkblue 1s forwards steps(1)';
           blueSpans[1].style.animation = 'blinkwhite 1s forwards steps(1)';
           headersOutOf3[1].style.animation = 'blinkblue 1s forwards steps(1)';
+          out1.removeEventListener('touchstart', down);
+          out1.removeEventListener('mousedown', down);
         }
       }
 
@@ -511,6 +513,7 @@ function drawGraph(b) {
     a = b;
     drawFunction();
     animationToggle2();
+    canvas.removeEventListener('touchstart', synchronize);
   }
 
   function wheelFunction(event) {
