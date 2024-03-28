@@ -15,6 +15,63 @@
     font-size: clamp(20px, 3vw, 3vw);
   }
 }
+
+@media all and (min-width: 768px) {
+  .panel {
+    width: 33.3vw;
+  }
+}
+
+@media all and (min-width: 415px) and (max-width: 768px) {
+  #secondscreen {
+    flex-wrap: wrap;
+    flex-direction: column;
+    aspect-ratio: 0.9;
+    justify-content: flex-start;
+  }
+  .panel.third {
+    width: 50%;
+  }
+  .panel.first {
+    width: 50%;
+  }
+  .panel.second {
+    width: 50%;
+    order: 3;
+    height: 100%;
+    align-self: baseline;
+  }
+  .panel.second > .clue-popup {
+    height: 25%;
+    top: 45%;
+  }
+  #valve1,
+  #valve5 {
+    height: 30%;
+    width: 35%;
+    left: 33%;
+  }
+  #valve2,
+  #valve3,
+  #valve4 {
+    height: 60%;
+    width: 60%;
+    left: 20%;
+  }
+  #valve2 {
+    top: -5%;
+  }
+  #valve1 {
+    top: 20%;
+  }
+  #valve4 {
+    top: 50%;
+  }
+  #valve5 {
+    top: 50%;
+  }
+}
+
 @media all and (max-width: 414px) {
   #firstscreen {
     background-position: left;

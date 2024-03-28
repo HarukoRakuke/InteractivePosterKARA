@@ -137,11 +137,10 @@ section {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  background-color: white;
+  background-color: magenta;
 }
 
 .panel {
-  width: 33.3vw;
   aspect-ratio: 0.9;
   position: relative;
   overflow: hidden;
@@ -212,26 +211,28 @@ section {
   top: 30%;
   left: 0;
   opacity: 0;
-  transition: opacity 0.5s ease-in-out;
   font-family: 'HelveticaBold', sans-serif;
   padding: 0vw 3vw;
   background-color: black;
   transform: scaleX(0.4);
-  font-size: clamp(85px, 5vw, 5vw);
+  font-size: clamp(45px, 5vw, 5vw);
   text-transform: uppercase;
   border-radius: 20px;
   transform-origin: left center;
   border: 0.3vw solid white;
   text-align: center;
+  align-content: center;
 }
 
 .clue-popup {
-  width: 70%;
+  width: 230%;
   height: 50%;
   position: absolute;
   top: 30%;
-
   z-index: 10;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
 }
 
 .popup.show,
@@ -369,6 +370,7 @@ section {
 /* 2 задание - синхронизирование*/
 .panel.second {
   overflow: visible;
+  background-color: white;
 }
 .valve {
   background-image: url('../img/valve.svg');
@@ -441,13 +443,13 @@ section {
   position: absolute;
   background-color: blue;
   border-radius: 100%;
-  padding: 1vw;
+  padding: clamp(10px, 1vw, 1vw);
   left: 2%;
   bottom: 2%;
   z-index: 8;
   color: white;
   font-family: 'HelveticaBold';
-  font-size: 1.5vw;
+  font-size: clamp(20px, 1.5vw, 1.5vw);
   line-height: 1vw;
 }
 #overflowplot {
@@ -613,8 +615,7 @@ section {
   aspect-ratio: 1;
   background-color: magenta;
   display: grid;
-  grid-template-columns: repeat(15, 9%);
-  grid-template-rows: repeat(16);
+  grid-template-columns: repeat(13, 1fr);
   position: relative;
 }
 .cell {
@@ -625,23 +626,6 @@ section {
   background-position: center;
   background-repeat: no-repeat;
 }
-.cell:nth-of-type(5) {
-  background-image: url('../img/cell1.svg');
-}
-.cell:nth-of-type(25) {
-  background-image: url('../img/cell2.svg');
-}
-.cell:nth-of-type(51) {
-  background-image: url('../img/cell3.svg');
-  background-size: 50%;
-}
-.cell:nth-of-type(78) {
-  background-image: url('../img/cell4.svg');
-}
-.cell:nth-of-type(140) {
-  background-image: url('../img/cell5.svg');
-}
-
 .cell-info-box {
   position: absolute;
   width: 60%;

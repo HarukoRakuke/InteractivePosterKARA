@@ -234,8 +234,9 @@ function popupSequence() {
 }
 
 function positionPopup(popup) {
-  const screenWidth = window.innerWidth;
-  const screenHeight = window.innerHeight;
+  let section = document.querySelector('#firstscreen');
+  const screenWidth = section.getBoundingClientRect().width;
+  const screenHeight = section.getBoundingClientRect().height;
   const { width, height } = popup.getBoundingClientRect();
 
   const widthRange = screenWidth - width;
@@ -434,7 +435,7 @@ function animationToggle2() {
 function drawScheme() {
   var canvasScheme = document.querySelector('#overflowplot');
   var ctx = canvasScheme.getContext('2d');
-  var b = Math.trunc(getRandomArbitrary(1, 5) * 10) / 10;
+  var b = Math.trunc(getRandomArbitrary(1, 4) * 10) / 10;
   console.log(`b - ${b}`);
 
   function f(x) {
@@ -517,7 +518,7 @@ function drawGraph(b) {
     event.preventDefault();
     var delta = event.deltaY;
 
-    if (delta < 0 && a < 5) {
+    if (delta < 0 && a < 4) {
       a *= 1.1;
     } else if (delta > 0 && a > 1) {
       a /= 1.1;
@@ -554,6 +555,34 @@ function clue() {
   });
 }
 
+function randomImageBackground() {
+  let imageUrls = [
+    'url("../img/cell1.svg")',
+    'url("../img/cell2.svg")',
+    'url("../img/cell3.svg")',
+    'url("../img/cell4.svg")',
+    'url("../img/cell5.svg")',
+  ];
+
+  let cells = document.querySelectorAll('.cell');
+
+  function updateBackground() {
+    for (let i = 0; i < 8; i++) {
+      let randomCellIndex = Math.floor(Math.random() * cells.length);
+      let randomImageIndex = Math.floor(Math.random() * imageUrls.length);
+      let randomCell = cells[randomCellIndex];
+      let randomImageUrl = imageUrls[randomImageIndex];
+      randomCell.style.backgroundImage = randomImageUrl;
+      setTimeout(() => {
+        randomCell.style.backgroundImage = 'none';
+      }, 1000);
+    }
+  }
+
+  // Update background image every 5 seconds
+  setInterval(updateBackground, 500);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   popupSequence();
   clue();
@@ -566,6 +595,7 @@ document.addEventListener('DOMContentLoaded', () => {
   pauseSpeed();
   drawScheme();
   setInterval(drawScheme, 5000);
+  randomImageBackground();
 
   document
     .querySelector('.signal_box')
