@@ -557,11 +557,11 @@ function clue() {
 
 function randomImageBackground() {
   let imageUrls = [
-    'url("../img/cell1.svg")',
-    'url("../img/cell2.svg")',
-    'url("../img/cell3.svg")',
-    'url("../img/cell4.svg")',
-    'url("../img/cell5.svg")',
+    'url("./img/cell1.svg")',
+    'url("./img/cell2.svg")',
+    'url("./img/cell3.svg")',
+    'url("./img/cell4.svg")',
+    'url("./img/cell5.svg")',
   ];
 
   let cells = document.querySelectorAll('.cell');
