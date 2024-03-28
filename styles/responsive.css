@@ -248,4 +248,7 @@
   .cell-info-box div p {
     font-size: 30px;
   }
+  .clue-popup {
+    width: 242%;
+  }
 }

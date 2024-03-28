@@ -277,7 +277,7 @@ function connectBlocksWithEachOther() {
             slider.offsetWidth / 6
         ) + 'px';
 
-      panel.addEventListener('touchstart', down);
+      out1.addEventListener('touchstart', down);
       out1.addEventListener('mousedown', down);
 
       function down(e) {
@@ -288,15 +288,8 @@ function connectBlocksWithEachOther() {
         if (e.type === 'touchstart') {
           out1.style.transition = 'left 0.8s ease-in-out';
           out1.style.left = expectedPosition;
-          blueSpans.forEach(function (blueSpan, index) {
-            if (index < 2) {
-              blueSpan.style.animation = 'blinkwhite 1s forwards steps(1)';
-            }
-          });
-          headersOutOf3.forEach(function (header, index) {
-            if (index < 2)
-              header.style.animation = 'blinkblue 1s forwards steps(1)';
-          });
+          out1sWithSpecificPosition++;
+          completeConnection();
         }
       }
 
@@ -514,6 +507,12 @@ function drawGraph(b) {
 
   drawFunction();
 
+  function synchronize() {
+    a = b;
+    drawFunction();
+    animationToggle2();
+  }
+
   function wheelFunction(event) {
     event.preventDefault();
     var delta = event.deltaY;
@@ -538,6 +537,7 @@ function drawGraph(b) {
   }
 
   canvas.addEventListener('wheel', wheelFunction);
+  canvas.addEventListener('touchstart', synchronize);
 }
 
 function clue() {
