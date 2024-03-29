@@ -336,7 +336,6 @@ section {
   background-size: contain;
   background-repeat: no-repeat;
   position: absolute;
-  left: 44%;
 }
 .slider:nth-of-type(odd) .plugin {
   background-image: url('../img/plug_in_2.svg');
@@ -475,6 +474,7 @@ section {
   height: 100%;
   margin-left: 20%;
   position: absolute;
+  pointer-events: none;
 }
 #circlesSection {
   position: relative;
@@ -587,6 +587,17 @@ section {
   transform: scaleX(0.8);
   padding-top: 2vw;
 }
+
+.clueCircles {
+  left: -10%;
+}
+.clue-popup.forth {
+  width: 140%;
+  left: -80%;
+  top: 65%;
+  display: block;
+}
+
 .ghost_letter {
   display: flex;
   justify-content: center;
@@ -623,6 +634,15 @@ section {
   background-size: 70%;
   background-position: center;
   background-repeat: no-repeat;
+}
+.cell:hover {
+  background-color: white;
+}
+.circleAnimation {
+  animation: blinkwhite 1s forwards steps(1);
+}
+.wiggle {
+  animation: glitch 0.2s linear infinite;
 }
 .cell-info-box {
   position: absolute;

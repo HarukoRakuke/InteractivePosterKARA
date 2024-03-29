@@ -11,8 +11,8 @@
 }
 @media all and (min-width: 414px) {
   .circle {
-    width: clamp(80px, 15vw, 15vw);
-    font-size: clamp(20px, 3vw, 3vw);
+    width: clamp(130px, 15vw, 15vw);
+    font-size: clamp(40px, 3vw, 3vw);
   }
 }
 
@@ -104,6 +104,12 @@
   #valve5 {
     top: 50%;
   }
+  .clueCircles {
+    left: -25%;
+  }
+  .clue-popup.forth {
+    width: 300%;
+  }
 }
 
 @media all and (max-width: 414px) {
@@ -116,8 +122,12 @@
   #secondscreen {
     flex-direction: column;
   }
+  .clueCircles {
+    left: 5%;
+  }
   .circle {
     width: 130px;
+    font-size: 35px;
   }
   .panel {
     width: 100%;
@@ -250,5 +260,10 @@
   }
   .clue-popup {
     width: 242%;
+  }
+
+  .clue-popup.forth {
+    left: 20%;
+    top: 25%;
   }
 }

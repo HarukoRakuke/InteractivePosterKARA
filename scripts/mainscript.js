@@ -9,6 +9,18 @@ function resetState() {
   state.currentCircle = 0;
 }
 
+function resetLinesShow() {
+  state.linesShow = [false, false, false, false];
+}
+
+function resetElements() {
+  var out1Elements = document.querySelectorAll('.plugout');
+
+  out1Elements.forEach(function (out1) {
+    out1.style.removeProperty('left');
+  });
+}
+
 function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
 }
@@ -101,11 +113,21 @@ function initCircle(circleElement) {
     ) {
       const circlesBlink = document.querySelectorAll('.circle');
       circlesBlink.forEach((circleBlink) => {
-        circleBlink.style.animation = 'blinkwhite 1s forwards steps(1)';
+        circleBlink.classList.add('circleAnimation');
       });
+      setTimeout(resetLinesShow, 5000);
+      setTimeout(eraseLines, 5000);
+      setTimeout(removeAnimation, 5000);
     }
 
     resetState();
+  });
+}
+
+function removeAnimation() {
+  const circlesBlink = document.querySelectorAll('.circle');
+  circlesBlink.forEach((circleBlink) => {
+    circleBlink.classList.remove('circleAnimation');
   });
 }
 
@@ -154,6 +176,17 @@ function drawLine(e) {
 function eraseLine() {
   const line = document.querySelector('.line');
   line.style.width = 0;
+}
+
+function eraseLines() {
+  let lines = document.querySelectorAll('.line');
+  lines.forEach((line) => {
+    line.classList.add('wiggle');
+    setTimeout(function () {
+      line.style.width = '0px';
+      line.classList.remove('wiggle');
+    }, 3000);
+  });
 }
 
 function drawLines() {
@@ -265,6 +298,7 @@ function connectBlocksWithEachOther() {
   sliders.forEach(function (slider, i) {
     var in1 = slider.querySelector('.plugin');
     var out1 = slider.querySelector('.plugout');
+
     var sliderRect = slider.getBoundingClientRect();
 
     slider.style.marginLeft = i * 3 + '%';
@@ -280,6 +314,8 @@ function connectBlocksWithEachOther() {
       out1.addEventListener('touchstart', down);
       out1.addEventListener('mousedown', down);
 
+      let out1Clicked = false;
+
       function down(e) {
         if (e.type === 'mousedown') {
           document.addEventListener('mousemove', move);
@@ -287,8 +323,12 @@ function connectBlocksWithEachOther() {
         }
         if (e.type === 'touchstart') {
           out1.style.transition = 'left 0.8s ease-in-out';
+          lastClickedOut1 = e.target;
           out1.style.left = expectedPosition;
-          out1sWithSpecificPosition++;
+          if (!out1Clicked) {
+            out1Clicked = true;
+            out1sWithSpecificPosition++;
+          }
           completeConnection();
         }
       }
@@ -299,13 +339,26 @@ function connectBlocksWithEachOther() {
       }
 
       function completeConnection() {
+        console.log(out1sWithSpecificPosition);
         if (out1sWithSpecificPosition >= 8) {
-          blueSpans[0].style.animation = 'blinkwhite 1s forwards steps(1)';
-          headersOutOf3[0].style.animation = 'blinkblue 1s forwards steps(1)';
-          blueSpans[1].style.animation = 'blinkwhite 1s forwards steps(1)';
-          headersOutOf3[1].style.animation = 'blinkblue 1s forwards steps(1)';
+          blueSpans[0].classList.remove('blinkwhite');
+          headersOutOf3[0].classList.remove('blinkblue');
+          blueSpans[1].classList.remove('blinkwhite');
+          headersOutOf3[1].classList.remove('blinkblue');
+          setTimeout(() => {
+            blueSpans[0].classList.add('blinkwhite');
+            headersOutOf3[0].classList.add('blinkblue');
+            blueSpans[1].classList.add('blinkwhite');
+            headersOutOf3[1].classList.add('blinkblue');
+          }, 0);
+          setTimeout(function resetCount() {
+            out1sWithSpecificPosition = 0;
+          }, 1);
           out1.removeEventListener('touchstart', down);
           out1.removeEventListener('mousedown', down);
+
+          setTimeout(resetElements, 5000);
+          setTimeout(connectBlocksWithEachOther, 5000);
         }
       }
 
@@ -316,7 +369,10 @@ function connectBlocksWithEachOther() {
         if (clientX < newLeft) {
           out1.style.left = expectedPosition;
           document.removeEventListener('mousemove', move);
-          out1sWithSpecificPosition++;
+          if (!out1Clicked) {
+            out1Clicked = true;
+            out1sWithSpecificPosition++;
+          }
         } else if (clientX >= sliderRect.right) {
           out1.style.left =
             sliderRect.right - sliderRect.left - out1.offsetWidth + 'px';
@@ -356,6 +412,21 @@ function resizeConnection() {
   });
 }
 
+function click(e) {
+  const valve = e.currentTarget.closest('.valve');
+  let boost = parseInt(getRandomArbitrary(1, 4)) * 2;
+  valve.style.animationDuration = `${boost}s`;
+  if (boost > 2 && boost <= 8) {
+    boost = boost - 2;
+  } else if (boost <= 2) {
+    boost = 8;
+  } else if (boost > 8) {
+    boost = 8;
+  }
+  valve.style.animationDuration = `${boost}s`;
+  checkSpeed();
+}
+
 function pauseSpeed() {
   var valves = document.querySelectorAll('.valve');
   valves.forEach(function (valve, index) {
@@ -363,17 +434,6 @@ function pauseSpeed() {
     valve.style.animationDuration = `${boost}s`;
     var center = valve.querySelector('.center');
     center.addEventListener('click', click);
-    function click(e) {
-      if (boost > 2 && boost <= 8) {
-        boost = boost - 2;
-      } else if (boost <= 2) {
-        boost = 8;
-      } else if (boost > 8) {
-        boost = 8;
-      }
-      valve.style.animationDuration = `${boost}s`;
-      checkSpeed();
-    }
   });
 }
 
@@ -391,10 +451,14 @@ function checkSpeed() {
   console.log(valveAnimationDuration);
   console.log(allEqual(valveAnimationDuration));
   if (allEqual(valveAnimationDuration)) {
+    valves.forEach((valve) => {
+      const center = valve.querySelector('.center');
+      center.removeEventListener('click', click);
+      setTimeout(pauseSpeed, 12000);
+    });
     animationToggle();
   }
 }
-
 function animationToggle() {
   var blueSpans = document.querySelectorAll('.bluespan');
   var headersOutOf3 = document.querySelectorAll('.headeroutof3');
@@ -544,11 +608,9 @@ function drawGraph(b) {
 }
 
 function clue() {
-  let panels = document.querySelectorAll('.panel');
-  panels.forEach((panel, index) => {
-    let clue = document.querySelectorAll('.clue-popup');
-    console.log(clue);
-    let question = panel.querySelector('.clue');
+  let questions = document.querySelectorAll('.clue');
+  let clue = document.querySelectorAll('.clue-popup');
+  questions.forEach((question, index) => {
     question.addEventListener('click', function () {
       clue[index].classList.add('show');
       setTimeout(() => {
@@ -586,6 +648,18 @@ function randomImageBackground() {
   setInterval(updateBackground, 500);
 }
 
+function fillArrows() {
+  let signalBoxs = document.querySelectorAll('.signal_box');
+  signalBoxs.forEach((signalBox) => {
+    signalBox.addEventListener('mouseover', function () {
+      signalBox.querySelector('.arrow svg path').style.fill = 'white';
+    });
+    signalBox.addEventListener('mouseout', function () {
+      signalBox.querySelector('.arrow svg path').style.fill = 'black';
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   popupSequence();
   clue();
@@ -599,16 +673,5 @@ document.addEventListener('DOMContentLoaded', () => {
   drawScheme();
   setInterval(drawScheme, 5000);
   randomImageBackground();
-
-  document
-    .querySelector('.signal_box')
-    .addEventListener('mouseover', function () {
-      document.querySelector('.arrow svg path').style.fill = 'white';
-    });
-
-  document
-    .querySelector('.signal_box')
-    .addEventListener('mouseout', function () {
-      document.querySelector('.arrow svg path').style.fill = 'black';
-    });
+  fillArrows();
 });
